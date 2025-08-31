@@ -1,0 +1,184 @@
+{
+  "version": "0.1.0",
+  "name": "artcoin_escrow",
+  "instructions": [
+    {
+      "name": "initEscrow",
+      "accounts": [
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "buyer"
+        },
+        {
+          "name": "seller"
+        },
+        {
+          "name": "usdtMint"
+        },
+        {
+          "name": "escrow",
+          "isMut": true
+        },
+        {
+          "name": "vaultAuth"
+        },
+        {
+          "name": "systemProgram"
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        },
+        {
+          "name": "expiresAt",
+          "type": "i64"
+        }
+      ]
+    },
+    {
+      "name": "fund",
+      "accounts": [
+        {
+          "name": "buyer",
+          "isSigner": true
+        },
+        {
+          "name": "escrow",
+          "isMut": true
+        },
+        {
+          "name": "usdtMint"
+        },
+        {
+          "name": "buyerAta",
+          "isMut": true
+        },
+        {
+          "name": "vaultAuth"
+        },
+        {
+          "name": "vaultAta",
+          "isMut": true
+        },
+        {
+          "name": "tokenProgram"
+        },
+        {
+          "name": "associatedTokenProgram"
+        },
+        {
+          "name": "systemProgram"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "setTrackingAndShip",
+      "accounts": [
+        {
+          "name": "seller",
+          "isSigner": true
+        },
+        {
+          "name": "escrow",
+          "isMut": true
+        }
+      ],
+      "args": [
+        {
+          "name": "trackingHash",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "confirmDelivery",
+      "accounts": [
+        {
+          "name": "buyer",
+          "isSigner": true
+        },
+        {
+          "name": "escrow",
+          "isMut": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "release",
+      "accounts": [
+        {
+          "name": "admin",
+          "isSigner": false,
+          "isOptional": true
+        },
+        {
+          "name": "escrow",
+          "isMut": true
+        },
+        {
+          "name": "usdtMint"
+        },
+        {
+          "name": "sellerAta",
+          "isMut": true
+        },
+        {
+          "name": "vaultAuth"
+        },
+        {
+          "name": "vaultAta",
+          "isMut": true
+        },
+        {
+          "name": "tokenProgram"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "refund",
+      "accounts": [
+        {
+          "name": "admin",
+          "isSigner": false,
+          "isOptional": true
+        },
+        {
+          "name": "escrow",
+          "isMut": true
+        },
+        {
+          "name": "usdtMint"
+        },
+        {
+          "name": "buyerAta",
+          "isMut": true
+        },
+        {
+          "name": "vaultAuth"
+        },
+        {
+          "name": "vaultAta",
+          "isMut": true
+        },
+        {
+          "name": "tokenProgram"
+        }
+      ],
+      "args": []
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ArtCoin — Checkout (USDT)</title>
+<meta name="theme-color" content="#6D53F1"><link rel="icon" href="/favicon.ico">
+<style>
+:root{--brand:#6D53F1}body{font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;background:#0e102d;color:#fff;margin:0}
+.wrap{max-width:920px;margin:0 auto;padding:24px}.card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:16px;margin-top:16px}
+.grid{display:grid;grid-template-columns:1fr 360px;gap:16px}label{display:block;font-size:13px;color:#cfd3ff;margin:8px 0 6px}
+input{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff}
+.btn{background:var(--brand);border:none;color:#fff;padding:12px 16px;border-radius:12px;font-weight:800;cursor:pointer}
+.qr{display:flex;align-items:center;justify-content:center;background:#fff;border-radius:12px;padding:12px}.note{color:#cfd3ff;font-size:13px}.link{word-break:break-all;background:rgba(255,255,255,.08);padding:8px;border-radius:8px;font-size:12px}
+</style></head>
+<body>
+<div class="wrap">
+  <h1>Checkout — USDT</h1>
+  <div class="grid">
+    <div class="card">
+      <label>Order ID</label><input id="oid" placeholder="e.g. AC-2025-001">
+      <label>Amount (USDT)</label><input id="amt" type="number" step="0.01" placeholder="e.g. 120.00">
+      <label>E-mail (for receipt)</label><input id="eml" type="email" placeholder="you@example.com">
+      <div style="margin-top:12px;display:flex;gap:10px"><button class="btn" id="btnGen">Generate link + QR</button><button class="btn" id="btnOpen" disabled>Open in wallet</button></div>
+      <p class="note">Solana Pay deep link with USDT mint. Your wallet composes the SPL transfer.</p>
+      <p class="link" id="link"></p>
+    </div>
+    <div class="card"><div class="qr" style="height:320px"><canvas id="qrc"></canvas></div><p class="note" style="margin-top:8px">Scan with Phantom or click “Open in wallet”.</p></div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<script>
+const state = { cfg:null, url:null };
+async function loadCfg(){ const j = await fetch('/api/config').then(r=>r.json()); state.cfg=j; }
+function solanaPayLink(recipient, amount, mint, label, message, memo){
+  const p=new URL('solana:'+recipient);
+  if(amount) p.searchParams.set('amount', String(amount));
+  if(mint) p.searchParams.set('spl-token', mint);
+  if(label) p.searchParams.set('label', label);
+  if(message) p.searchParams.set('message', message);
+  if(memo) p.searchParams.set('memo', memo);
+  return p.toString();
+}
+async function logOrder(orderId, amount, email){
+  try{ await fetch('/api/order/create',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({orderId,amount,email})}); }catch(e){}
+}
+async function generate(){
+  if(!state.cfg) await loadCfg();
+  const oid = document.getElementById('oid').value.trim() || ('AC-' + Date.now());
+  const amt = Number(document.getElementById('amt').value);
+  const eml = document.getElementById('eml').value.trim();
+  if(!amt || amt <= 0) return alert('Enter amount');
+  const url = solanaPayLink(state.cfg.merchant, amt, state.cfg.usdtMint, 'ArtCoin Gallery', 'Order '+oid, oid);
+  state.url = url; document.getElementById('link').textContent = url; document.getElementById('btnOpen').disabled=false;
+  try{ QRCode.toCanvas(document.getElementById('qrc'), url, { width: 296, margin: 1 }); }catch(e){}
+  logOrder(oid, amt, eml);
+}
+function openWallet(){ if(!state.url) return; window.location.href = state.url; setTimeout(()=>{ window.location.href='/thanks'; }, 7000); }
+document.getElementById('btnGen').onclick=generate; document.getElementById('btnOpen').onclick=openWallet;
+</script>
+</body></html>

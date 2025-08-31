@@ -1,0 +1,25 @@
+{
+  "functions": {
+    "api/**/*.js": {
+      "runtime": "nodejs18.x"
+    }
+  },
+  "routes": [
+    {
+      "src": "/buyer",
+      "dest": "/buyer.html"
+    },
+    {
+      "src": "/seller",
+      "dest": "/seller.html"
+    },
+    {
+      "src": "/checkout",
+      "dest": "/checkout.html"
+    },
+    {
+      "src": "/thanks",
+      "dest": "/thanks.html"
+    }
+  ]
+}

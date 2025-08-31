@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ArtCoin Gallery — Crypto Art Marketplace</title>
+<link rel="icon" href="/favicon.ico"><link rel="manifest" href="/site.webmanifest">
+<meta property="og:image" content="/og-image.png"><meta name="theme-color" content="#6D53F1">
+<style>
+:root{--brand:#6D53F1}*{box-sizing:border-box}body{font-family:Inter,system-ui,Arial,sans-serif;background:#0e102d;margin:0;color:#fff}
+.hero{max-width:980px;margin:0 auto;padding:60px 20px;text-align:center}
+h1{font-size:42px;margin:0 0 10px}p.lead{color:#cfd3ff;margin:0 auto 28px;max-width:640px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:24px}
+.card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:18px}
+a.btn{display:inline-block;background:var(--brand);color:#fff;text-decoration:none;padding:12px 16px;border-radius:12px;font-weight:800}
+small.note{color:#cfd3ff}
+</style></head>
+<body>
+  <div class="hero">
+    <h1>ArtCoin Gallery</h1>
+    <p class="lead">Buy & sell art with USDT on Solana. Direct pay is live. Escrow (on‑chain) is in staging.</p>
+    <div class="grid">
+      <div class="card"><h3>Checkout (Direct USDT)</h3><p>Pay to merchant address via Solana Pay link + QR.</p><a class="btn" href="/checkout">Proceed to Checkout</a></div>
+      <div class="card"><h3>Buyer Portal (Escrow)</h3><p>Init → Fund → Confirm → Refund (devnet).</p><a class="btn" href="/buyer">Open Buyer</a></div>
+      <div class="card"><h3>Seller Portal (Escrow)</h3><p>Set tracking, mark shipped, release if allowed.</p><a class="btn" href="/seller">Open Seller</a></div>
+    </div>
+    <p style="margin-top:24px"><small class="note">Brand color #6D53F1 · Phantom wallet required for on‑chain actions.</small></p>
+  </div>
+</body></html>
