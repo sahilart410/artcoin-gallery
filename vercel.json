@@ -1,25 +1,9 @@
 {
-  "functions": {
-    "api/**/*.js": {
-      "runtime": "nodejs18.x"
-    }
-  },
+  "functions": { "api/**/*.js": { "runtime": "nodejs22.x" } },
   "routes": [
-    {
-      "src": "/buyer",
-      "dest": "/buyer.html"
-    },
-    {
-      "src": "/seller",
-      "dest": "/seller.html"
-    },
-    {
-      "src": "/checkout",
-      "dest": "/checkout.html"
-    },
-    {
-      "src": "/thanks",
-      "dest": "/thanks.html"
-    }
+    { "src": "/buyer",    "dest": "/buyer.html" },
+    { "src": "/seller",   "dest": "/seller.html" },
+    { "src": "/checkout", "dest": "/checkout.html" },
+    { "src": "/thanks",   "dest": "/thanks.html" }
   ]
 }
