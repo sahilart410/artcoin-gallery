@@ -1,9 +1,9 @@
 {
-  "name": "ArtCoin Gallery",
-  "short_name": "ArtCoin",
+  "name": "Artcoin Gallery",
+  "short_name": "Artcoin",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0e102d",
+  "background_color": "#0E102D",
   "theme_color": "#6D53F1",
   "icons": [
     {
