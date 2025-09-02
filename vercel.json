@@ -1,5 +1,4 @@
 {
-  "functions": { "api/**/*.js": { "runtime": "nodejs20.x" } },
   "routes": [
     { "src": "/buyer",    "dest": "/buyer.html" },
     { "src": "/seller",   "dest": "/seller.html" },
